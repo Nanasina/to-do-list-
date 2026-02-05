@@ -1,10 +1,11 @@
-import {CirclePlus} from "lucide-react";
+import {CirclePlus, Trash2} from "lucide-react";
 import { useState } from "react";
 
 
 function Saisie() {
   const [tache, setTache] = useState("")
   const [taches, setTaches] = useState([])
+  const [fait, setFait] = useState(false)
 
   const handelchange = (e) =>{
     setTache(e.target.value)
@@ -36,15 +37,27 @@ function Saisie() {
                 <CirclePlus />
                 Ajouter
                 </button>
+
         </div>
       </div>
-      <div className="bg-primary/10 w-180 ml-10 rounded-xl">
-        {taches.map((t, index) => (
-          <p key={index} className="p-3">{t}</p>
-        ))} 
+      <div className="bg-primary/10 w-180 ml-10 rounded-xl flex">
+        {taches.map((t, index) => {
+           return(
+            <>
+            <p key={index} className={`p-3 ${fait?"line-through opacity-5à" : ""}`}>{t}</p>
+             <input type="checkbox" checked={fait} className="checkbox checkbox-secondary mt-3 " 
+             onChange={(e) => setFait(e.target.checked)} />
+             <button className="btn btn-error "><Trash2 className="w-4 h-4" /></button>
+            </>
+           )
+        })
+        } 
+        
         </div>
     </>
   )
 }
 
 export default Saisie
+
+

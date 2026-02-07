@@ -19,6 +19,12 @@ function Saisie() {
     setTache("")
   }
 
+  const suppTache = (indexSupp) =>{
+    setTaches(taches.filter((t, index) =>
+    index != indexSupp
+    ))
+  }
+
   return (
     <>
       <div className="m-20 p-0 flex gap-2">
@@ -47,7 +53,7 @@ function Saisie() {
             <p key={index} className={`p-3 ${fait?"line-through opacity-5à" : ""}`}>{t}</p>
              <input type="checkbox" checked={fait} className="checkbox checkbox-secondary mt-3 " 
              onChange={(e) => setFait(e.target.checked)} />
-             <button className="btn btn-error "><Trash2 className="w-4 h-4" /></button>
+             <button className="btn btn-error " onClick={() => suppTache(index)}><Trash2 className="w-4 h-4" /></button>
             </>
            )
         })
